@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://jihongyu.github.io">
+  <title>HTTPS（一）加密算法 | JiHy&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="加密算法的四个意义隐私性：对称和非对称加密算法 完整性：摘要算法 身份确认：数字签名 不可抵赖：数字签名 Macos 中的 openssl 版本是 LibreSSL 2.8.3  随机数算法 利用计算机噪声生成随机数：  1sudo head -c 32 /dev/urandom | openssl enc -base64  伪随机数算法  Blum Blum Shub Mersenne Twis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTPS（一）加密算法">
+<meta property="og:url" content="https://jihongyu.github.io/2020/03/14/encrypt-algo/index.html">
+<meta property="og:site_name" content="JiHy&#39;s Blogs">
+<meta property="og:description" content="加密算法的四个意义隐私性：对称和非对称加密算法 完整性：摘要算法 身份确认：数字签名 不可抵赖：数字签名 Macos 中的 openssl 版本是 LibreSSL 2.8.3  随机数算法 利用计算机噪声生成随机数：  1sudo head -c 32 /dev/urandom | openssl enc -base64  伪随机数算法  Blum Blum Shub Mersenne Twis">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2020-03-15T07:35:24.142Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTPS（一）加密算法">
+<meta name="twitter:description" content="加密算法的四个意义隐私性：对称和非对称加密算法 完整性：摘要算法 身份确认：数字签名 不可抵赖：数字签名 Macos 中的 openssl 版本是 LibreSSL 2.8.3  随机数算法 利用计算机噪声生成随机数：  1sudo head -c 32 /dev/urandom | openssl enc -base64  伪随机数算法  Blum Blum Shub Mersenne Twis">
+  
+    <link rel="alternative" href="/" title="JiHy&#39;s Blogs" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-88425770-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="http://ogor5qhr9.bkt.clouddn.com/my_icon.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">JiHy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">haha</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/JiHongyu" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/jihy123" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://zhihu.com/people/hy-ji" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">JiHy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://ogor5qhr9.bkt.clouddn.com/my_icon.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">JiHy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">haha</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        
+		        	<li><a href="/archives">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JiHongyu" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/jihy123" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com/people/hy-ji" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-encrypt-algo" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTPS（一）加密算法
+    </h1>
+  
+
+        <a href="/2020/03/14/encrypt-algo/" class="archive-article-date">
+  	<time datetime="2020-03-14T09:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="加密算法的四个意义"><a href="#加密算法的四个意义" class="headerlink" title="加密算法的四个意义"></a>加密算法的四个意义</h2><p>隐私性：对称和非对称加密算法</p>
+<p>完整性：摘要算法</p>
+<p>身份确认：数字签名</p>
+<p>不可抵赖：数字签名</p>
+<p>Macos 中的 openssl 版本是 <strong>LibreSSL 2.8.3</strong></p>
+<hr>
+<h2 id="随机数算法"><a href="#随机数算法" class="headerlink" title="随机数算法"></a>随机数算法</h2><ul>
+<li>利用计算机噪声生成随机数：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo head -c 32 /dev/urandom | openssl enc -base64</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>伪随机数算法</p>
+<ul>
+<li>Blum Blum Shub</li>
+<li>Mersenne Twister</li>
+<li>Linear congruential generator</li>
+</ul>
+</li>
+<li><p>密码学随机数生成算法</p>
+<ul>
+<li>块密码算法 CTR 模式</li>
+<li>摘要算法</li>
+<li>流密码算法</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="密码学-HASH-算法"><a href="#密码学-HASH-算法" class="headerlink" title="密码学 HASH 算法"></a>密码学 HASH 算法</h2><p>HASH 算法特点：</p>
+<ul>
+<li>强抗碰撞性</li>
+<li>弱抗碰撞性</li>
+<li>单向性</li>
+</ul>
+<p>HASH 算法只要要是<strong>弱抗碰撞性</strong>和<strong>单向性</strong></p>
+<p>算法分类：</p>
+<ul>
+<li>MD5 算法：已经被证明是不安全的，理论上不具有弱抗碰撞性，不建议使用</li>
+<li><p>SHA</p>
+<ul>
+<li>SHA-1: 已经被证明是不安全的</li>
+<li>SHA-2: SHA-256、SHA-512、SHA-224、SHA-384</li>
+<li>SHA-3: SHA3-256、SHA3-512、SHA3-224、SHA3-384</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h2><blockquote>
+<p>基本思想：</p>
+<p>密文 = E(明文，算法，密钥)</p>
+<p>明文 = D(密文，算法，密钥)</p>
+</blockquote>
+<p>算法类型：</p>
+<ul>
+<li>块密码算法（例如：AES）：基于分组块的迭代运算</li>
+<li>流密码算法（例如：RC4）：基于 XOR 运算</li>
+</ul>
+<p>AES 迭代类型：</p>
+<ul>
+<li>ECB：最简单，不推荐</li>
+<li>CBC：推荐</li>
+<li>CTR：推荐</li>
+</ul>
+<p>块密码算法的填充标准 <strong>PKCS#7</strong>。<strong>PKCS#7</strong> 可以处理 255 内的字节，<strong>PKCS#5</strong> 是他的子集，只能处理 8 个字节</p>
+<p>对于 AES 算法，双方需要约定分组长度、迭代类型、填充方式</p>
+<p>openssl 工具使用（加密解密均需要输入口令）：</p>
+<p>利用 openssl 工具进行加密解密：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密</span></span><br><span class="line">openssl enc -aes-256-cbc -salt -<span class="keyword">in</span> file.txt -out file.encrypt -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">openssl enc -d -aes-256-cbc -<span class="keyword">in</span> file.encrypt</span><br></pre></td></tr></table></figure>
+<p>AES 算法涉及到 salt、初始化向量、密钥、口令。其中 <code>密钥=salt+口令</code></p>
+<hr>
+<h2 id="消息验证码算法"><a href="#消息验证码算法" class="headerlink" title="消息验证码算法"></a>消息验证码算法</h2><p>由于存在中间人攻击，密码学HASH算法不能校验消息是否被篡改。</p>
+<p>MAC 算法的种类：</p>
+<ul>
+<li>CBC-MAC 算法</li>
+<li>HMAC 算法</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通HASH算法</span></span><br><span class="line">openssl dgst -sha1 file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># MAC 算法</span></span><br><span class="line">openssl dgst -sha224 -hmac <span class="string">"123"</span> file.txt</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h2><p>用途：加密解密、数字签名</p>
+<h3 id="RSA-算法"><a href="#RSA-算法" class="headerlink" title="RSA 算法"></a>RSA 算法</h3><p>密钥文件（包含公钥和私钥）</p>
+<ul>
+<li>p: 一个大质数</li>
+<li>q: 另一个大质数</li>
+<li>n: p*q</li>
+<li>e: 公开指数</li>
+<li>d: 私钥=func(e,p,q)</li>
+</ul>
+<p>加密 C = M^e (mod n)，解密 M = C^d (mod n)</p>
+<p>签名 s = m^d (mod n)，验签 m = s^e (mod n)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个 RSA 密钥（私钥）</span></span><br><span class="line">openssl genrsa 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成一个 RSA 私钥，并导出公钥</span></span><br><span class="line">openssl genrsa -out rsa_pri.pem 2048</span><br><span class="line">openssl rsa -<span class="keyword">in</span> rsa_pri.pem -pubout -out rsa_pub.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># 校验密钥是否正确</span></span><br><span class="line">openssl rsa -<span class="keyword">in</span> rsa_pri.pem -check -noout</span><br><span class="line">openssl rsa -pubin -<span class="keyword">in</span> rsa_pub.pem -text</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加解密文件（默认采用PKCS#1 v1.5填充 -pkcs，也可以手动指定PKCS#1OAEP填充 -oaep）</span></span><br><span class="line">openssl rsautl -encrypt -pubin -inkey rsa_pub.pem -<span class="keyword">in</span> file.txt -out file.encrypt</span><br><span class="line">openssl rsautl -decrypt -inkey rsa_pri.pem -<span class="keyword">in</span> file.encrypt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数字签名，对摘要签名</span></span><br><span class="line">openssl dgst -sha256 -sign rsa_pri.pem -out file.sign file.txt</span><br><span class="line">openssl dgst -sha256 -verify rsa_pub.pem -signature file.sign file.txt</span><br></pre></td></tr></table></figure>
+<h3 id="ECC-算法"><a href="#ECC-算法" class="headerlink" title="ECC 算法"></a>ECC 算法</h3><p>加密：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 罗列自带的命名曲线</span></span><br><span class="line">openssl ecparam -list_curves</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成一组椭圆曲线密钥，并显示出参数</span></span><br><span class="line">openssl ecparam -name secp256k1 -out secp256k1.pem</span><br><span class="line">openssl ecparam -<span class="keyword">in</span> secp256k1.pem -text -param_enc explicit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## output:</span></span><br><span class="line">Field Type: prime-field</span><br><span class="line">Prime:</span><br><span class="line">    00:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:</span><br><span class="line">    ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:fe:ff:</span><br><span class="line">    ff:<span class="built_in">fc</span>:2f</span><br><span class="line">A:    0</span><br><span class="line">B:    7 (0x7)</span><br><span class="line">Generator (uncompressed):</span><br><span class="line">    04:79:be:66:7e:f9:dc:bb:ac:55:a0:62:95:ce:87:</span><br><span class="line">    0b:07:02:9b:<span class="built_in">fc</span>:db:2d:ce:28:d9:59:f2:81:5b:16:</span><br><span class="line">    f8:17:98:48:3a:da:77:26:a3:c4:65:5d:a4:fb:<span class="built_in">fc</span>:</span><br><span class="line">    0e:11:08:a8:fd:17:b4:48:a6:85:54:19:9c:47:d0:</span><br><span class="line">    8f:fb:10:d4:b8</span><br><span class="line">Order:</span><br><span class="line">    00:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:</span><br><span class="line">    ff:fe:ba:ae:dc:e6:af:48:a0:3b:bf:d2:5e:8c:d0:</span><br><span class="line">    36:41:41</span><br><span class="line">Cofactor:  1 (0x1)</span><br></pre></td></tr></table></figure>
+<p>A、B 椭圆曲线参数，P 大质数，Generator G点，n 椭圆曲线的阶，Cofactor 椭圆曲线所有点除以 n</p>
+<p>数字签名算法 ECDSA：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openssl ecparam -name secp256k1 -genkey -out ecdsa_pri.pem</span><br><span class="line">openssl ec -<span class="keyword">in</span> ecdsa_pri.pem -pubout -out ecdsa_pub.pem</span><br><span class="line">openssl dgst -sha256 -sign ecdsa_pri.pem -out file.sign file.txt</span><br><span class="line">openssl dgst -sha256 -verify ecdsa_pub.pem -signature file.sign file.txt</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h2><p>口令：方便记忆的人造简单密钥</p>
+<p>密钥：计算机生成的随机数</p>
+<h3 id="DH-密钥协商算法"><a href="#DH-密钥协商算法" class="headerlink" title="DH 密钥协商算法"></a>DH 密钥协商算法</h3><p>由通信双方 A 和 B 一起协商生成一个会话密钥（思想比算法更重要）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<i class="icon-book icon"></i>
+	<a class="article-category-link" href="/categories/HTTPS/">HTTPS</a>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://jihongyu.github.io/2020/03/14/encrypt-algo/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/03/15/https-deployment/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          https deployment
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/09/python-cookbook/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python cookbook</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="encrypt-algo" data-title="HTTPS（一）加密算法" data-url="https://jihongyu.github.io/2020/03/14/encrypt-algo/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jhyqy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2020 JiHy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ['\[','\]'] ],
+      processEscapes: true
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    },
+});
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Latex</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">复杂网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">组合数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">入门</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">菜鸟一枚，为了那只可爱的珊。</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

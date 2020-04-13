@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://jihongyu.github.io">
+  <title>Combinatorial Mathematics | JiHy&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言课程链接 OEIS数据库">
+<meta name="keywords" content="组合数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Combinatorial Mathematics">
+<meta property="og:url" content="https://jihongyu.github.io/2016/12/06/Combinatorial-Mathematics/index.html">
+<meta property="og:site_name" content="JiHy&#39;s Blogs">
+<meta property="og:description" content="前言课程链接 OEIS数据库">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2020-03-14T08:34:07.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Combinatorial Mathematics">
+<meta name="twitter:description" content="前言课程链接 OEIS数据库">
+  
+    <link rel="alternative" href="/" title="JiHy&#39;s Blogs" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-88425770-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="http://ogor5qhr9.bkt.clouddn.com/my_icon.jpg" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">JiHy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">haha</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/JiHongyu" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/jihy123" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://zhihu.com/people/hy-ji" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">JiHy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://ogor5qhr9.bkt.clouddn.com/my_icon.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">JiHy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">haha</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        
+		        	<li><a href="/archives">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JiHongyu" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/jihy123" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com/people/hy-ji" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-Combinatorial-Mathematics" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Combinatorial Mathematics
+    </h1>
+  
+
+        <a href="/2016/12/06/Combinatorial-Mathematics/" class="archive-article-date">
+  	<time datetime="2016-12-06T15:36:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-06</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="http://www.xuetangx.com/courses/course-v1:TsinghuaX+60240013_tv+2015_T1/info," title="学堂在线" target="_blank" rel="noopener">课程链接</a></p>
+<p><a href="http://oeis.org/," title="The On-Line Encyclopedia of Integer Sequences" target="_blank" rel="noopener">OEIS数据库</a></p>
+<a id="more"></a>
+<h1 id="Chapter-1-2-组合数学初步"><a href="#Chapter-1-2-组合数学初步" class="headerlink" title="Chapter 1~2: 组合数学初步"></a>Chapter 1~2: 组合数学初步</h1><h3 id="基本计算规则（注意事件的独立性）："><a href="#基本计算规则（注意事件的独立性）：" class="headerlink" title="基本计算规则（注意事件的独立性）："></a>基本计算规则（注意事件的独立性）：</h3><ul>
+<li>加法规则：考虑事件的成分（类别）</li>
+<li>乘法规则：考虑事件的步骤</li>
+<li>减法法则：考虑事件的对立面</li>
+<li>除法法则：等价类（重复类）的划分</li>
+</ul>
+<h3 id="组合问题的经典模型1：小球选取模型"><a href="#组合问题的经典模型1：小球选取模型" class="headerlink" title="组合问题的经典模型1：小球选取模型"></a>组合问题的经典模型1：小球选取模型</h3><p>描述：将 $n$ 个 <strong>不同</strong> 的小球选择 $r$ 个放入 $r$ 个盒子中，存在多少种不同的选取方法。从这个问题我们可以引入组合数学的两个基本的计数问题。</p>
+<h4 id="排列（Permutation）：盒子有编号，取出的小球有顺序"><a href="#排列（Permutation）：盒子有编号，取出的小球有顺序" class="headerlink" title="排列（Permutation）：盒子有编号，取出的小球有顺序"></a>排列（Permutation）：盒子有编号，取出的小球有顺序</h4><ul>
+<li><p>基于乘法规则递推关系式：$P(n,r)=n\times P(n-1,r-1)$</p>
+</li>
+<li><p>基于加法规则的递推关系式：$P(n,r)=P(n-1,r)+P(n-1,r-1)$</p>
+</li>
+</ul>
+<h4 id="组合（Combination）：盒子无编号，取出的小球无顺序"><a href="#组合（Combination）：盒子无编号，取出的小球无顺序" class="headerlink" title="组合（Combination）：盒子无编号，取出的小球无顺序"></a>组合（Combination）：盒子无编号，取出的小球无顺序</h4><p>重要公式：</p>
+<p>$C(n,l)\times C(l,r)=C(n,r)\times C(n-r,l-r)$</p>
+<h3 id="组合问题的经典模型2：格路模型"><a href="#组合问题的经典模型2：格路模型" class="headerlink" title="组合问题的经典模型2：格路模型"></a>组合问题的经典模型2：格路模型</h3><p>描述：从坐标(0,0)点到(m,n)点的所有格路径的条数是多少。</p>
+<p>解答：$C(m+n,m)$</p>
+<p>杨辉三角，二项式定理</p>
+<p>Chu-Vandermonde 等式<br>[<br>    \dbinom{m+n}{r} = \sum_{k=0}^{r} \dbinom{m}{k}\cdot\dbinom{n}{r-k}<br>]</p>
+<h3 id="各种排列"><a href="#各种排列" class="headerlink" title="各种排列"></a>各种排列</h3><p>圆排列：从 $n$ 个 <strong>不同</strong> 的元素取出 $r$ 个构成一个圈，一共有多少种取法。</p>
+<p>解答：将圆排列转换成线排列，再去掉重复的计数（除法规则）。答案：$P(n,r)/r$</p>
+<p>项链排列：圆排列的基础上考虑镜像对称。</p>
+<p>解答：$P(n,r)/2r$</p>
+<h4 id="多重排列"><a href="#多重排列" class="headerlink" title="多重排列"></a>多重排列</h4><p>元素的个数是有限的，元素是可以重复选取的（多项式定理）。</p>
+<p>全排列定义：若干元素，$r_1$个 1，$r_2$个 2···$r_t$个 t，其元素个数值和为 $n$，则其全排列数记为：<br>[<br>    P(n;r_1,r_2,…,r_t)=\frac{n!}{r_1!r_2!…r_t!} \qquad \sum_{i=1}^t r_i = n<br>]</p>
+<p>其思路运用了除法规则，类比于圆排列。</p>
+<p>排列组合计算技巧：相邻问题用捆绑发；分区域问题用隔板法</p>
+<h4 id="可重组合"><a href="#可重组合" class="headerlink" title="可重组合"></a>可重组合</h4><p>$n$ 个不通用的元素中可重复地选取 $r$ 个元素，则取法数有 $C’(n,r)=C(n+r-1,r)$</p>
+<p>证明方法：</p>
+<ul>
+<li>方法1：基于序列相加的组合证明。（基本方法）</li>
+<li>方法2：转换问题：在 $n$ 个不同的元素去 $r$ 个进行组合，等价于吧 $r$ 个元素分成 $n$ 个区域。（高级抽象）</li>
+</ul>
+<h4 id="不相邻组合"><a href="#不相邻组合" class="headerlink" title="不相邻组合"></a>不相邻组合</h4><p>$n$ 个不通用的元素中不相邻地选取 $r$ 个元素，则取法数有 $C’’(n,r)=C(n-r+1,r)$</p>
+<h3 id="基本排列组合简单模型小结"><a href="#基本排列组合简单模型小结" class="headerlink" title="基本排列组合简单模型小结"></a>基本排列组合简单模型小结</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:center">例子</th>
+<th style="text-align:center">顺序要求</th>
+<th style="text-align:center">重复要求</th>
+<th>计数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无重组合</td>
+<td style="text-align:center">n个球取r个</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td>$C(n,r)$</td>
+</tr>
+<tr>
+<td>无重排列</td>
+<td style="text-align:center">n个球取r个</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td>$P(n,r)$</td>
+</tr>
+<tr>
+<td>可重组合</td>
+<td style="text-align:center">线性方程求解个数</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td>$C(n+r-1,r)$</td>
+</tr>
+<tr>
+<td>可重排列</td>
+<td style="text-align:center">单词组合</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td>$n^r$</td>
+</tr>
+<tr>
+<td>多重全组合</td>
+<td style="text-align:center">$r_1$个a，$r_2$个b组成的n位串</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td>$\frac{n!}{r_1!r_2!}$</td>
+</tr>
+</tbody>
+</table>
+<p>注意：可重的意思是元素是无限的，多重的意思是元素的个数是有限的（但不限于1）。</p>
+<h3 id="全排列生成算法"><a href="#全排列生成算法" class="headerlink" title="全排列生成算法"></a>全排列生成算法</h3><h4 id="原始递归法"><a href="#原始递归法" class="headerlink" title="原始递归法"></a>原始递归法</h4><p>由 n-1 个元素排列生成 n 个元素的排列 </p>
+<h4 id="字典序法"><a href="#字典序法" class="headerlink" title="字典序法"></a>字典序法</h4><p>基于字典序生成全排列，其思想是序列前缀尽量不变，只是微微增大后缀部分。算法步骤如下：</p>
+<ol>
+<li>从右至左扫描序列，找出序列的第一个下降点</li>
+<li>在该下降点的右边找出一个最小变化点</li>
+<li>交换这两个元素，形成下一个排列</li>
+</ol>
+<h4 id="SJT-Steinhaus–Johnson–Trotter-算法"><a href="#SJT-Steinhaus–Johnson–Trotter-算法" class="headerlink" title="SJT(Steinhaus–Johnson–Trotter)算法"></a>SJT(Steinhaus–Johnson–Trotter)算法</h4><p>局部移动。</p>
+<p>设[a1,a2 … aN] 每一项都有向左或向右两个移动方向。</p>
+<ol>
+<li>初始化所有移动方向向左；</li>
+<li>如果移动方向的值比自己小，就可移动，比如 <1>2 &lt;3, 每个数字前箭头的方向表示该数字的移动方向，3可以移动，2和1不可移动；</1></li>
+<li>移动最大的可以动项，在上面例子中就是数字3；</li>
+<li>将所有比移动项大的项方向反转，重复第三步，直到不能移动为止。</li>
+</ol>
+<h3 id="Stirling数估计"><a href="#Stirling数估计" class="headerlink" title="Stirling数估计"></a>Stirling数估计</h3><p>[<br>    n! \sim \sqrt{2\pi n}(\frac{n}{e})^n<br>]</p>
+<h1 id="Chapter-3-母函数（生成函数）初步"><a href="#Chapter-3-母函数（生成函数）初步" class="headerlink" title="Chapter 3: 母函数（生成函数）初步"></a>Chapter 3: 母函数（生成函数）初步</h1><p>母函数是形式幂级数，是一种计数工具其形式为：<br>[<br>    G(x) = c_0 + c_1x + c_2x^2 + c_3x^3 + …<br>]</p>
+<p>母函数的一项 $cx_k$：幂级数 $k$ 表示实际 <strong>对象个数</strong> 的抽象；系数 $c$：表示在该 <strong>对象个数</strong> 下的计数。</p>
+<p>母函数实际上蕴含着一种映射关系</p>
+<p>母函数运算中蕴含着乘法规则和加法规则。</p>
+<p>母函数就是一系列用来展示一串数字序列的挂衣架。</p>
+<h4 id="砝码称重问题"><a href="#砝码称重问题" class="headerlink" title="砝码称重问题"></a>砝码称重问题</h4><p>1g, 2g, 3g, 4g 砝码各一个，问一共有多少种称重方式。</p>
+<h3 id="整数拆分问题"><a href="#整数拆分问题" class="headerlink" title="整数拆分问题"></a>整数拆分问题</h3><p>有序拆分：$C(n-1,r-1)$</p>
+<p>无序拆分：把一个整数拆分成若干部分之和，相当于将 $n$ 个 <strong>无区别</strong> 的小球放入 $r$ 个 <strong>无区别</strong> 的盒子里。</p>
+<p>注意无序拆分与可重组合模型的区别：无需拆分中的基本元素是 <strong>对象的个数</strong>，而可重组合模型是 <strong>不同类别对象的个数</strong>。举个例子：在取小球模型中，整数拆分是将小球放入不同的盒子里；而可重模型是将不同颜色的小球放入同一个盒子里。</p>
+<p>模式方法</p>
+<p>Birch and Swinnerton-Dyer 猜想</p>
+<p>Ferrers 图像</p>
+<p>整数拆分的形象几何表示。</p>
+<p>性质：</p>
+<ul>
+<li>整数拆分中，最大数是 $k$ 和 $k$ 个数之和的拆分数是相等的。</li>
+<li>若整数 $n$ 能拆分成若干个奇数之和，则其 Ferrers 图像是自共轭的。</li>
+</ul>
+<p>母函数与递推关系（差分方程）</p>
+<p>汉诺塔问题</p>
+<p>求 $n$ 位十进制数中出现偶数个5的数的个数</p>
+<p>求解：</p>
+<p>令 $a_n$ 表示 $n$位十进制数中偶数个5的数的个数</p>
+<p>令 $b_n$ 表示 $n$位十进制数中奇数个5的数的个数<br>[<br>    a_n=9 \cdot a_{n-1}+b_{n-1}<br>    b_n=9 \cdot b_{n-1}+a_{n-1}<br>]</p>
+<p>母函数小结：</p>
+<p>母函数建立了一个序列与递推关系的桥梁。</p>
+<h1 id="Chapter-4-线性常系数递推关系"><a href="#Chapter-4-线性常系数递推关系" class="headerlink" title="Chapter 4: 线性常系数递推关系"></a>Chapter 4: 线性常系数递推关系</h1><p>Fibonacci 递推关系：<br>[<br>    F_n = F_{n-1}+F_{n-2}<br>]</p>
+<p>Fibonacci 恒等关系式：<br>[<br>    F_1^2+F_2^1+···+F_n^2=F_nF_{n=1}<br>]<br>[<br>    F_1+F_2+···+F_n=F_{n+2}-1<br>]<br>[<br>    F_1+F_3+···+F_{2n-1}=F_{2n}<br>]<br>[<br>    F_{n-1}F_{n+1} -F_n^2= (-1)^n<br>]</p>
+<p>Fibonacci 通项直接计算方法：</p>
+<p>母函数法</p>
+<p>Fibonacci优选法</p>
+<h4 id="线性常系数其次递推关系"><a href="#线性常系数其次递推关系" class="headerlink" title="线性常系数其次递推关系"></a>线性常系数其次递推关系</h4><p>递推多项式产生特征多项式</p>
+<p>特征多项式根的情况：</p>
+<ul>
+<li>无重根</li>
+<li>有重根</li>
+<li>无实根</li>
+</ul>
+<h1 id="Chapter-4-神奇的序列"><a href="#Chapter-4-神奇的序列" class="headerlink" title="Chapter 4: 神奇的序列"></a>Chapter 4: 神奇的序列</h1><h3 id="Catalan数"><a href="#Catalan数" class="headerlink" title="Catalan数"></a>Catalan数</h3><p>递推关系：</p>
+<p>[<br>C(n) = \sum_{k=1}^n C(k-1) \cdot C(n-k)<br>]</p>
+<p>解析表达式：<br>[<br>C(n)=\frac{1}{n+1} \dbinom{2n}{n}<br>]<br>栈混洗模型</p>
+<p>二叉树个数计数问题</p>
+<p>正多边形划分为不重叠的三角形计数问题</p>
+<p>Dyck Path</p>
+<p>Dyck Word （括号匹配）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组合数学/">组合数学</a></li></ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://jihongyu.github.io/2016/12/06/Combinatorial-Mathematics/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/12/20/msys2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          msys2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/04/Use-Sublime-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Use Sublime 3</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Combinatorial-Mathematics" data-title="Combinatorial Mathematics" data-url="https://jihongyu.github.io/2016/12/06/Combinatorial-Mathematics/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jhyqy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2020 JiHy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ['\[','\]'] ],
+      processEscapes: true
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    },
+});
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Latex</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">复杂网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">组合数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">入门</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">菜鸟一枚，为了那只可爱的珊。</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
