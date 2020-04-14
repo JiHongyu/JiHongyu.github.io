@@ -50,7 +50,7 @@ ga('send', 'pageview');
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="http://ogor5qhr9.bkt.clouddn.com/my_icon.jpg" class="js-avatar">
+			<img src="http://img.jf258.com/uploads/2014-01-04/191117181.jpg" class="js-avatar">
 		</a>
 
 		<hgroup>
@@ -115,7 +115,7 @@ ga('send', 'pageview');
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="http://ogor5qhr9.bkt.clouddn.com/my_icon.jpg" class="js-avatar">
+				<img src="http://img.jf258.com/uploads/2014-01-04/191117181.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author">JiHy</h1>
@@ -159,6 +159,66 @@ ga('send', 'pageview');
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-springboot-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/14/springboot-1/">springboot_1</a>
+    </h1>
+  
+
+        <a href="/2020/04/14/springboot-1/" class="archive-article-date">
+  	<time datetime="2020-04-14T15:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-14</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="命令行创建-Springboot-应用"><a href="#命令行创建-Springboot-应用" class="headerlink" title="命令行创建 Springboot 应用"></a>命令行创建 Springboot 应用</h2><p>需要借助 Maven archetype 插件，从模板原型构建应用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DgroupId=com.company -DartifactId=project -Dversion=1.0-SNAPSHOT -Dpackage=com.company.project</span><br></pre></td></tr></table></figure>
+<p>查看依赖树</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree -Dincludes=xxx</span><br></pre></td></tr></table></figure>
+<p>Maven spring-boot 插件在 spring-boot-starter-parent Pom 文件中。需要通过 <code>mvn spring-boot:run</code> 启动 sprinboot 应用需要在 pom 文件引入该 parent。</p>
+<p>通过 <code>mvn spring-boot:run</code> 启动的话 Pom 文件里面不需要构建脚本。</p>
+<p>（未完待续）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/14/springboot-1/#more">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
   
     <article id="post-https-deployment" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -767,60 +827,6 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-git-tutorial" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/04/git-tutorial/">git_tutorial</a>
-    </h1>
-  
-
-        <a href="/2017/01/04/git-tutorial/" class="archive-article-date">
-  	<time datetime="2017-01-04T00:56:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-04</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Git 是牛逼的软件开发版本控制系统，学习它是大大的好</p>
-        <a class="article-more-a"  href="/2017/01/04/git-tutorial/#more">more >></a>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/04/git-tutorial/#more">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -908,11 +914,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Latex</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">复杂网络</a>
+                <a href="javascript:void(0)">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -920,7 +922,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">组合数学</a>
+                <a href="javascript:void(0)">复杂网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Latex</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -936,14 +942,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">linux</a>
               </li>
              
@@ -952,7 +950,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
