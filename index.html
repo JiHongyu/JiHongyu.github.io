@@ -184,6 +184,19 @@ ga('send', 'pageview');
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree -Dincludes=xxx</span><br></pre></td></tr></table></figure>
 <p>Maven spring-boot 插件在 spring-boot-starter-parent Pom 文件中。需要通过 <code>mvn spring-boot:run</code> 启动 sprinboot 应用需要在 pom 文件引入该 parent。</p>
 <p>通过 <code>mvn spring-boot:run</code> 启动的话 Pom 文件里面不需要构建脚本。</p>
+<p>springboot 应用打包成 jar 包需要 <code>spring-boot-maven-plugin</code> 插件。</p>
+<p>编译的目录结构：</p>
+<ul>
+<li><p>BOOT-INF/classes 存放编译后的 class 文件</p>
+</li>
+<li><p>BOOT-INF/lib 存放依赖的 jar 包</p>
+</li>
+<li><p>META-INF 存放应用相关元信息，例如 <code>MANIFEST.MF</code></p>
+</li>
+<li><p>org/ 存放 springboot 相关的 class 文件</p>
+</li>
+</ul>
+<p>springboot 既可以打包成 Jar 包，也可以打包成 War 包运行。打成 war 包的时候需要手动在 POM 文件添加 <code>spring-boot-loader</code></p>
 <p>（未完待续）</p>
 
       
@@ -914,23 +927,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">学术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">复杂网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Latex</a>
+                <a href="javascript:void(0)">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">复杂网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -947,6 +956,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Latex</a>
               </li>
              
               <li class="article-tag-list-item">
