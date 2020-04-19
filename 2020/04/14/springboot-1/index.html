@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://jihongyu.github.io">
   <title>Springboot 入门杂谈（Springboot 编程思想1～4章小结） | JiHy&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 1mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1">
+  <meta name="description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 123456789mvn archetype:generate\ -B\ -DarchetypeGroupId=org.apache.maven.archetypes\ -DarchetypeArtifactId=maven-archetype-quickstart\ -Darchetype">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot 入门杂谈（Springboot 编程思想1～4章小结）">
 <meta property="og:url" content="https://jihongyu.github.io/2020/04/14/springboot-1/index.html">
 <meta property="og:site_name" content="JiHy&#39;s Blogs">
-<meta property="og:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 1mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1">
+<meta property="og:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 123456789mvn archetype:generate\ -B\ -DarchetypeGroupId=org.apache.maven.archetypes\ -DarchetypeArtifactId=maven-archetype-quickstart\ -Darchetype">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2020-04-17T16:02:25.665Z">
+<meta property="og:updated_time" content="2020-04-19T09:53:51.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot 入门杂谈（Springboot 编程思想1～4章小结）">
-<meta name="twitter:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 1mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1">
+<meta name="twitter:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 123456789mvn archetype:generate\ -B\ -DarchetypeGroupId=org.apache.maven.archetypes\ -DarchetypeArtifactId=maven-archetype-quickstart\ -Darchetype">
   
     <link rel="alternative" href="/" title="JiHy&#39;s Blogs" type="application/atom+xml">
   
@@ -179,7 +179,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="命令行创建-Springboot-应用"><a href="#命令行创建-Springboot-应用" class="headerlink" title="命令行创建 Springboot 应用"></a>命令行创建 Springboot 应用</h2><p>需要借助 Maven archetype 插件，从模板原型构建应用。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DgroupId=com.company -DartifactId=project -Dversion=1.0-SNAPSHOT -Dpackage=com.company.project</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate\</span><br><span class="line"> -B\</span><br><span class="line"> -DarchetypeGroupId=org.apache.maven.archetypes\</span><br><span class="line"> -DarchetypeArtifactId=maven-archetype-quickstart\</span><br><span class="line"> -DarchetypeVersion=1.1\</span><br><span class="line"> -DgroupId=com.company\</span><br><span class="line"> -DartifactId=project\</span><br><span class="line"> -Dversion=1.0-SNAPSHOT\</span><br><span class="line"> -Dpackage=com.company.project</span><br></pre></td></tr></table></figure>
 <p>查看依赖树</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree -Dincludes=xxx</span><br></pre></td></tr></table></figure>
 <p>Maven spring-boot 插件在 spring-boot-starter-parent Pom 文件中。需要通过 <code>mvn spring-boot:run</code> 启动 sprinboot 应用需要在 pom 文件引入该 parent。</p>
@@ -197,8 +197,8 @@ ga('send', 'pageview');
 </li>
 </ul>
 <p>springboot 既可以打包成 Jar 包，也可以打包成 War 包运行。打成 war 包的时候需要手动在 POM 文件添加 <code>spring-boot-loader</code></p>
-<p>Springboot 的 Maven 固化依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>采用导入方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Springboot 的 Maven 固化依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>采用导入方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>Springboot 的 Web 编程范式有两大类：Servlet 和 Reactor</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Servlet --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Reactor --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-webflux<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Springboot 嵌入式容器主要有 <code>Tomcat</code>、<code>Jetty</code>、<code>Undertow</code>、<code>Reactor Netty</code> 四大类。前三类既可以用于 Servlet Web，也可以用于 Reactor Web；最后一类只能用用于 Reactor Web</p>
@@ -280,6 +280,15 @@ ga('send', 'pageview');
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/04/19/springboot-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Springboot 自动装配初探（Springboot 编程思想5～6章小结）
+        
+      </div>
+    </a>
   
   
     <a href="/2020/03/15/https-deployment/" id="article-nav-older" class="article-nav-link-wrap">
@@ -397,23 +406,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">复杂网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -425,19 +426,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">linux</a>
+                <a href="javascript:void(0)">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">springboot</a>
+                <a href="javascript:void(0)">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -446,6 +439,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Python</a>
               </li>
              
               <li class="article-tag-list-item">
