@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://jihongyu.github.io">
   <title>Springboot 自动装配初探（Springboot 编程思想5～6章小结） | JiHy&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Springboot 门面注解：@SpringBootApplication @SpringBootApplication 继承了以下三个注解，并通过 @AliasFor 代理了被继承注解的一些值设置： 12345@SpringBootConfiguration@EnableAutoConfiguration@ComponentScan(excludeFilters = &amp;#123;  @Filt">
+  <meta name="description" content="Springboot 门面注解：@SpringBootApplication">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot 自动装配初探（Springboot 编程思想5～6章小结）">
 <meta property="og:url" content="https://jihongyu.github.io/2020/04/19/springboot-2/index.html">
 <meta property="og:site_name" content="JiHy&#39;s Blogs">
-<meta property="og:description" content="Springboot 门面注解：@SpringBootApplication @SpringBootApplication 继承了以下三个注解，并通过 @AliasFor 代理了被继承注解的一些值设置： 12345@SpringBootConfiguration@EnableAutoConfiguration@ComponentScan(excludeFilters = &amp;#123;  @Filt">
+<meta property="og:description" content="Springboot 门面注解：@SpringBootApplication">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2020-04-19T13:10:46.613Z">
+<meta property="og:updated_time" content="2020-04-21T11:27:14.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot 自动装配初探（Springboot 编程思想5～6章小结）">
-<meta name="twitter:description" content="Springboot 门面注解：@SpringBootApplication @SpringBootApplication 继承了以下三个注解，并通过 @AliasFor 代理了被继承注解的一些值设置： 12345@SpringBootConfiguration@EnableAutoConfiguration@ComponentScan(excludeFilters = &amp;#123;  @Filt">
+<meta name="twitter:description" content="Springboot 门面注解：@SpringBootApplication">
   
     <link rel="alternative" href="/" title="JiHy&#39;s Blogs" type="application/atom+xml">
   
@@ -179,6 +179,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>Springboot 门面注解：<code>@SpringBootApplication</code></p>
+<a id="more"></a>
 <p><code>@SpringBootApplication</code> 继承了以下三个注解，并通过 <code>@AliasFor</code> 代理了被继承注解的一些值设置：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123;</span><br><span class="line">  <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter<span class="class">.<span class="keyword">class</span>),</span></span><br><span class="line"><span class="class">  @<span class="title">Filter</span>(<span class="title">type</span> </span>= FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter<span class="class">.<span class="keyword">class</span>) &#125;)</span></span><br></pre></td></tr></table></figure>
 <p><code>@ComponentScan</code> 用于扫描 <code>@Component</code> 组件</p>
@@ -196,7 +197,15 @@ ga('send', 'pageview');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnProperty</span></span><br><span class="line"><span class="meta">@ConditionalOnBean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line"><span class="meta">@ConditionalOnClass</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingClass</span></span><br><span class="line"><span class="meta">@ConditionalOnExpression</span></span><br><span class="line"><span class="meta">@ConditionalOnSingleCandidate</span></span><br><span class="line"><span class="meta">@ConditionalOnResource</span></span><br><span class="line"><span class="meta">@ConditionalOnJndi</span></span><br><span class="line"><span class="meta">@ConditionalOnJava</span></span><br><span class="line"><span class="meta">@ConditionalOnWebApplication</span></span><br><span class="line"><span class="meta">@ConditionalOnNotWebApplication</span></span><br><span class="line"><span class="meta">@ConditionalOnCloudPlatform</span></span><br></pre></td></tr></table></figure>
 <p>这些 Conditional 也是可以按照 And、Or、Not 组合使用的，需要实现下面的抽象类:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllNestedConditions</span><br><span class="line">AnyNestedCondition</span><br><span class="line">NoneNestedConditions</span><br></pre></td></tr></table></figure>
-<p>（未完待续）</p>
+<p>Springboot 5大特性：</p>
+<ul>
+<li>SpringApplication</li>
+<li>自动装配外部配置化</li>
+<li>Springboot Actuator</li>
+<li>嵌入式 Web 容器</li>
+</ul>
+<p>这块需要看官方文档才能理解</p>
+<p>12 Factor: <a href="http://12factor.net" target="_blank" rel="noopener">http://12factor.net</a></p>
 
       
 
@@ -390,15 +399,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">学术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">复杂网络</a>
+                <a href="javascript:void(0)">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -410,19 +415,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">进阶</a>
+                <a href="javascript:void(0)">复杂网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -434,11 +427,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Python</a>
+                <a href="javascript:void(0)">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://jihongyu.github.io">
   <title>Springboot 入门杂谈（Springboot 编程思想1～4章小结） | JiHy&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 123456789mvn archetype:generate\ -B\ -DarchetypeGroupId=org.apache.maven.archetypes\ -DarchetypeArtifactId=maven-archetype-quickstart\ -Darchetype">
+  <meta name="description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot 入门杂谈（Springboot 编程思想1～4章小结）">
 <meta property="og:url" content="https://jihongyu.github.io/2020/04/14/springboot-1/index.html">
 <meta property="og:site_name" content="JiHy&#39;s Blogs">
-<meta property="og:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 123456789mvn archetype:generate\ -B\ -DarchetypeGroupId=org.apache.maven.archetypes\ -DarchetypeArtifactId=maven-archetype-quickstart\ -Darchetype">
+<meta property="og:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2020-04-19T09:53:51.127Z">
+<meta property="og:updated_time" content="2020-04-21T11:27:32.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot 入门杂谈（Springboot 编程思想1～4章小结）">
-<meta name="twitter:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。 123456789mvn archetype:generate\ -B\ -DarchetypeGroupId=org.apache.maven.archetypes\ -DarchetypeArtifactId=maven-archetype-quickstart\ -Darchetype">
+<meta name="twitter:description" content="命令行创建 Springboot 应用需要借助 Maven archetype 插件，从模板原型构建应用。">
   
     <link rel="alternative" href="/" title="JiHy&#39;s Blogs" type="application/atom+xml">
   
@@ -179,6 +179,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="命令行创建-Springboot-应用"><a href="#命令行创建-Springboot-应用" class="headerlink" title="命令行创建 Springboot 应用"></a>命令行创建 Springboot 应用</h2><p>需要借助 Maven archetype 插件，从模板原型构建应用。</p>
+<a id="more"></a>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate\</span><br><span class="line"> -B\</span><br><span class="line"> -DarchetypeGroupId=org.apache.maven.archetypes\</span><br><span class="line"> -DarchetypeArtifactId=maven-archetype-quickstart\</span><br><span class="line"> -DarchetypeVersion=1.1\</span><br><span class="line"> -DgroupId=com.company\</span><br><span class="line"> -DartifactId=project\</span><br><span class="line"> -Dversion=1.0-SNAPSHOT\</span><br><span class="line"> -Dpackage=com.company.project</span><br></pre></td></tr></table></figure>
 <p>查看依赖树</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree -Dincludes=xxx</span><br></pre></td></tr></table></figure>
@@ -406,15 +407,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">学术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">复杂网络</a>
+                <a href="javascript:void(0)">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -426,19 +423,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">进阶</a>
+                <a href="javascript:void(0)">复杂网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -450,11 +435,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Python</a>
+                <a href="javascript:void(0)">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
               </li>
              
               <li class="article-tag-list-item">

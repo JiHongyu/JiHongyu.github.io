@@ -179,25 +179,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>Springboot 门面注解：<code>@SpringBootApplication</code></p>
-<p><code>@SpringBootApplication</code> 继承了以下三个注解，并通过 <code>@AliasFor</code> 代理了被继承注解的一些值设置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123;</span><br><span class="line">  <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter<span class="class">.<span class="keyword">class</span>),</span></span><br><span class="line"><span class="class">  @<span class="title">Filter</span>(<span class="title">type</span> </span>= FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter<span class="class">.<span class="keyword">class</span>) &#125;)</span></span><br></pre></td></tr></table></figure>
-<p><code>@ComponentScan</code> 用于扫描 <code>@Component</code> 组件</p>
-<p><code>@SpringBootConfiguration</code> 继承于 <code>@Configuration</code>，表示其为一个配置类</p>
-<p><code>@EnableAutoConfiguration</code> 是 springboot 实现自动化配置的核心注解，激活 <strong>自动装配机制</strong>。内部通过@Import注入了一个ImportSelector的现类 <code>AutoConfigurationImportSelector</code>，这个 <code>ImportSelector</code> 最终实现根据我们的配置，动态加载所需的bean.</p>
-<p><code>@SpringBootApplication</code> 类既可以标记在 Main 类上，也可以标记在其他类上面，最后由 <code>SpringApplication#run</code> 引导。</p>
-<p>由 <code>@Bean</code> 生成的 Bean 根据实现的地方会有差异：</p>
-<ul>
-<li>在 <code>@Configuration</code> 下声明的 <code>@Bean</code> 属于 Full 模式，会有 CGLIB 增强（代理）</li>
-<li>其他的 Bean （比如 <code>@Component</code> 下声明）属于 Lite 模式，不会有 CGLIB 增强</li>
-</ul>
-<p>创建一个自动装配类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 定义一个没有 @Configuration 注解的类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloConfig</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Bean</span>(<span class="string">"hello"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"Jihongyu"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 定义自动配置类</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(HelloConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">HelloAutoConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. resources 目录下面新建 META-INF/spring.factories 文件，配置开启自动配置类</span></span><br><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">com.cmb.config.HelloAutoConfig</span><br></pre></td></tr></table></figure>
-<p>自动装配一般都会和 <code>@Conditional</code> 一起使用，对配置进行约束。<code>spring-boot-autoconfigure</code> 对其又进行了扩展，构建了 13 个 Conditional 扩展注解:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConditionalOnProperty</span></span><br><span class="line"><span class="meta">@ConditionalOnBean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line"><span class="meta">@ConditionalOnClass</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingClass</span></span><br><span class="line"><span class="meta">@ConditionalOnExpression</span></span><br><span class="line"><span class="meta">@ConditionalOnSingleCandidate</span></span><br><span class="line"><span class="meta">@ConditionalOnResource</span></span><br><span class="line"><span class="meta">@ConditionalOnJndi</span></span><br><span class="line"><span class="meta">@ConditionalOnJava</span></span><br><span class="line"><span class="meta">@ConditionalOnWebApplication</span></span><br><span class="line"><span class="meta">@ConditionalOnNotWebApplication</span></span><br><span class="line"><span class="meta">@ConditionalOnCloudPlatform</span></span><br></pre></td></tr></table></figure>
-<p>这些 Conditional 也是可以按照 And、Or、Not 组合使用的，需要实现下面的抽象类:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AllNestedConditions</span><br><span class="line">AnyNestedCondition</span><br><span class="line">NoneNestedConditions</span><br></pre></td></tr></table></figure>
-<p>（未完待续）</p>
-
+        <a class="article-more-a"  href="/2020/04/19/springboot-2/#more">more >></a>
       
 
       
@@ -251,32 +233,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="命令行创建-Springboot-应用"><a href="#命令行创建-Springboot-应用" class="headerlink" title="命令行创建 Springboot 应用"></a>命令行创建 Springboot 应用</h2><p>需要借助 Maven archetype 插件，从模板原型构建应用。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate\</span><br><span class="line"> -B\</span><br><span class="line"> -DarchetypeGroupId=org.apache.maven.archetypes\</span><br><span class="line"> -DarchetypeArtifactId=maven-archetype-quickstart\</span><br><span class="line"> -DarchetypeVersion=1.1\</span><br><span class="line"> -DgroupId=com.company\</span><br><span class="line"> -DartifactId=project\</span><br><span class="line"> -Dversion=1.0-SNAPSHOT\</span><br><span class="line"> -Dpackage=com.company.project</span><br></pre></td></tr></table></figure>
-<p>查看依赖树</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree -Dincludes=xxx</span><br></pre></td></tr></table></figure>
-<p>Maven spring-boot 插件在 spring-boot-starter-parent Pom 文件中。需要通过 <code>mvn spring-boot:run</code> 启动 sprinboot 应用需要在 pom 文件引入该 parent。</p>
-<p>通过 <code>mvn spring-boot:run</code> 启动的话 Pom 文件里面不需要构建脚本。</p>
-<p>springboot 应用打包成 jar 包需要 <code>spring-boot-maven-plugin</code> 插件。</p>
-<p>编译的目录结构：</p>
-<ul>
-<li><p>BOOT-INF/classes 存放编译后的 class 文件</p>
-</li>
-<li><p>BOOT-INF/lib 存放依赖的 jar 包</p>
-</li>
-<li><p>META-INF 存放应用相关元信息，例如 <code>MANIFEST.MF</code></p>
-</li>
-<li><p>org/ 存放 springboot 相关的 class 文件</p>
-</li>
-</ul>
-<p>springboot 既可以打包成 Jar 包，也可以打包成 War 包运行。打成 war 包的时候需要手动在 POM 文件添加 <code>spring-boot-loader</code></p>
-<p>Springboot 的 Maven 固化依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>采用导入方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>Springboot 的 Web 编程范式有两大类：Servlet 和 Reactor</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Servlet --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Reactor --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-webflux<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Springboot 嵌入式容器主要有 <code>Tomcat</code>、<code>Jetty</code>、<code>Undertow</code>、<code>Reactor Netty</code> 四大类。前三类既可以用于 Servlet Web，也可以用于 Reactor Web；最后一类只能用用于 Reactor Web</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Tomcat --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- undertow --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-undertow<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- jetty --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jetty<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- netty Web Server --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-reactor-netty<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>有实现需要学一些 Reactor Web</p>
-
+        <a class="article-more-a"  href="/2020/04/14/springboot-1/#more">more >></a>
       
 
       
@@ -334,36 +291,7 @@ ga('send', 'pageview');
 <p>中间人攻击：RSA 和 DH 保证不了，需要使用 PKI 技术。</p>
 <p>PKI 不是 TLS/SSL 技术的一部分，但是必须引入 PKI 才能保证 TLS/SSL 安全。</p>
 <p>PKI 的核心是证 <strong>证书</strong>，通过 CA 签发的证书保证信息交换的可靠性。</p>
-<p>申请证书的流程：</p>
-<ol>
-<li><p>服务器准备发布 <a href="https://www.test.com" target="_blank" rel="noopener">https://www.test.com</a> </p>
-</li>
-<li><p>服务器实体生成公开密钥算法的一对密钥，比如一对 RSA 密钥</p>
-</li>
-<li><p>服务器实体生成 CSR 文件交给 CA 机构</p>
-</li>
-<li><p>CA 机构核实 CSR 文件</p>
-</li>
-<li><p>对于审核通过的 CSR 文件，CA 机构用自己的私钥对 CSR 签名附在 CSR 文件后面得到证书文件</p>
-</li>
-<li><p>将证书文件返回给服务实体</p>
-</li>
-</ol>
-<p>浏览器访问流程：</p>
-<ol>
-<li>浏览器向 <a href="https://www.test.com" target="_blank" rel="noopener">https://www.test.com</a> 发出请求</li>
-<li>服务器收到请求后将证书和 RSA 公钥发送给浏览器</li>
-<li>浏览器根据证书中的机构信息，确定是否为 CA 签发证书，并进行验证</li>
-<li>若验证成功，说明服务器身份是受 CA 机构认可，然后对比 RSA 公钥和证书公钥对比，判断是否是同一个服务器实体</li>
-<li>如果验证再次成功，说明身份校验完成，接下来可以进行密钥协商</li>
-</ol>
-<p>HTTPS 一般要求全站 HTTPS 策略，但是会存在 HTTPS 页面引用了非 HTTPS 元素，导致出现 <strong>混合内容</strong></p>
-<ul>
-<li>被动混合</li>
-<li>主动混合</li>
-</ul>
-<p>浏览器采取的策略一般是不一样的。</p>
-
+        <a class="article-more-a"  href="/2020/03/15/https-deployment/#more">more >></a>
       
 
       
@@ -420,101 +348,7 @@ ga('send', 'pageview');
 <p>完整性：摘要算法</p>
 <p>身份确认：数字签名</p>
 <p>不可抵赖：数字签名</p>
-<p>Macos 中的 openssl 版本是 <strong>LibreSSL 2.8.3</strong></p>
-<hr>
-<h2 id="随机数算法"><a href="#随机数算法" class="headerlink" title="随机数算法"></a>随机数算法</h2><ul>
-<li>利用计算机噪声生成随机数：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo head -c 32 /dev/urandom | openssl enc -base64</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>伪随机数算法</p>
-<ul>
-<li>Blum Blum Shub</li>
-<li>Mersenne Twister</li>
-<li>Linear congruential generator</li>
-</ul>
-</li>
-<li><p>密码学随机数生成算法</p>
-<ul>
-<li>块密码算法 CTR 模式</li>
-<li>摘要算法</li>
-<li>流密码算法</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="密码学-HASH-算法"><a href="#密码学-HASH-算法" class="headerlink" title="密码学 HASH 算法"></a>密码学 HASH 算法</h2><p>HASH 算法特点：</p>
-<ul>
-<li>强抗碰撞性</li>
-<li>弱抗碰撞性</li>
-<li>单向性</li>
-</ul>
-<p>HASH 算法只要要是<strong>弱抗碰撞性</strong>和<strong>单向性</strong></p>
-<p>算法分类：</p>
-<ul>
-<li>MD5 算法：已经被证明是不安全的，理论上不具有弱抗碰撞性，不建议使用</li>
-<li><p>SHA</p>
-<ul>
-<li>SHA-1: 已经被证明是不安全的</li>
-<li>SHA-2: SHA-256、SHA-512、SHA-224、SHA-384</li>
-<li>SHA-3: SHA3-256、SHA3-512、SHA3-224、SHA3-384</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h2><blockquote>
-<p>基本思想：</p>
-<p>密文 = E(明文，算法，密钥)</p>
-<p>明文 = D(密文，算法，密钥)</p>
-</blockquote>
-<p>算法类型：</p>
-<ul>
-<li>块密码算法（例如：AES）：基于分组块的迭代运算</li>
-<li>流密码算法（例如：RC4）：基于 XOR 运算</li>
-</ul>
-<p>AES 迭代类型：</p>
-<ul>
-<li>ECB：最简单，不推荐</li>
-<li>CBC：推荐</li>
-<li>CTR：推荐</li>
-</ul>
-<p>块密码算法的填充标准 <strong>PKCS#7</strong>。<strong>PKCS#7</strong> 可以处理 255 内的字节，<strong>PKCS#5</strong> 是他的子集，只能处理 8 个字节</p>
-<p>对于 AES 算法，双方需要约定分组长度、迭代类型、填充方式</p>
-<p>openssl 工具使用（加密解密均需要输入口令）：</p>
-<p>利用 openssl 工具进行加密解密：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加密</span></span><br><span class="line">openssl enc -aes-256-cbc -salt -<span class="keyword">in</span> file.txt -out file.encrypt -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">openssl enc -d -aes-256-cbc -<span class="keyword">in</span> file.encrypt</span><br></pre></td></tr></table></figure>
-<p>AES 算法涉及到 salt、初始化向量、密钥、口令。其中 <code>密钥=salt+口令</code></p>
-<hr>
-<h2 id="消息验证码算法"><a href="#消息验证码算法" class="headerlink" title="消息验证码算法"></a>消息验证码算法</h2><p>由于存在中间人攻击，密码学HASH算法不能校验消息是否被篡改。</p>
-<p>MAC 算法的种类：</p>
-<ul>
-<li>CBC-MAC 算法</li>
-<li>HMAC 算法</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 普通HASH算法</span></span><br><span class="line">openssl dgst -sha1 file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># MAC 算法</span></span><br><span class="line">openssl dgst -sha224 -hmac <span class="string">"123"</span> file.txt</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h2><p>用途：加密解密、数字签名</p>
-<h3 id="RSA-算法"><a href="#RSA-算法" class="headerlink" title="RSA 算法"></a>RSA 算法</h3><p>密钥文件（包含公钥和私钥）</p>
-<ul>
-<li>p: 一个大质数</li>
-<li>q: 另一个大质数</li>
-<li>n: p*q</li>
-<li>e: 公开指数</li>
-<li>d: 私钥=func(e,p,q)</li>
-</ul>
-<p>加密 C = M^e (mod n)，解密 M = C^d (mod n)</p>
-<p>签名 s = m^d (mod n)，验签 m = s^e (mod n)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个 RSA 密钥（私钥）</span></span><br><span class="line">openssl genrsa 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成一个 RSA 私钥，并导出公钥</span></span><br><span class="line">openssl genrsa -out rsa_pri.pem 2048</span><br><span class="line">openssl rsa -<span class="keyword">in</span> rsa_pri.pem -pubout -out rsa_pub.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># 校验密钥是否正确</span></span><br><span class="line">openssl rsa -<span class="keyword">in</span> rsa_pri.pem -check -noout</span><br><span class="line">openssl rsa -pubin -<span class="keyword">in</span> rsa_pub.pem -text</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加解密文件（默认采用PKCS#1 v1.5填充 -pkcs，也可以手动指定PKCS#1OAEP填充 -oaep）</span></span><br><span class="line">openssl rsautl -encrypt -pubin -inkey rsa_pub.pem -<span class="keyword">in</span> file.txt -out file.encrypt</span><br><span class="line">openssl rsautl -decrypt -inkey rsa_pri.pem -<span class="keyword">in</span> file.encrypt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数字签名，对摘要签名</span></span><br><span class="line">openssl dgst -sha256 -sign rsa_pri.pem -out file.sign file.txt</span><br><span class="line">openssl dgst -sha256 -verify rsa_pub.pem -signature file.sign file.txt</span><br></pre></td></tr></table></figure>
-<h3 id="ECC-算法"><a href="#ECC-算法" class="headerlink" title="ECC 算法"></a>ECC 算法</h3><p>加密：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 罗列自带的命名曲线</span></span><br><span class="line">openssl ecparam -list_curves</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成一组椭圆曲线密钥，并显示出参数</span></span><br><span class="line">openssl ecparam -name secp256k1 -out secp256k1.pem</span><br><span class="line">openssl ecparam -<span class="keyword">in</span> secp256k1.pem -text -param_enc explicit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## output:</span></span><br><span class="line">Field Type: prime-field</span><br><span class="line">Prime:</span><br><span class="line">    00:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:</span><br><span class="line">    ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:fe:ff:</span><br><span class="line">    ff:<span class="built_in">fc</span>:2f</span><br><span class="line">A:    0</span><br><span class="line">B:    7 (0x7)</span><br><span class="line">Generator (uncompressed):</span><br><span class="line">    04:79:be:66:7e:f9:dc:bb:ac:55:a0:62:95:ce:87:</span><br><span class="line">    0b:07:02:9b:<span class="built_in">fc</span>:db:2d:ce:28:d9:59:f2:81:5b:16:</span><br><span class="line">    f8:17:98:48:3a:da:77:26:a3:c4:65:5d:a4:fb:<span class="built_in">fc</span>:</span><br><span class="line">    0e:11:08:a8:fd:17:b4:48:a6:85:54:19:9c:47:d0:</span><br><span class="line">    8f:fb:10:d4:b8</span><br><span class="line">Order:</span><br><span class="line">    00:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:ff:</span><br><span class="line">    ff:fe:ba:ae:dc:e6:af:48:a0:3b:bf:d2:5e:8c:d0:</span><br><span class="line">    36:41:41</span><br><span class="line">Cofactor:  1 (0x1)</span><br></pre></td></tr></table></figure>
-<p>A、B 椭圆曲线参数，P 大质数，Generator G点，n 椭圆曲线的阶，Cofactor 椭圆曲线所有点除以 n</p>
-<p>数字签名算法 ECDSA：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openssl ecparam -name secp256k1 -genkey -out ecdsa_pri.pem</span><br><span class="line">openssl ec -<span class="keyword">in</span> ecdsa_pri.pem -pubout -out ecdsa_pub.pem</span><br><span class="line">openssl dgst -sha256 -sign ecdsa_pri.pem -out file.sign file.txt</span><br><span class="line">openssl dgst -sha256 -verify ecdsa_pub.pem -signature file.sign file.txt</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h2><p>口令：方便记忆的人造简单密钥</p>
-<p>密钥：计算机生成的随机数</p>
-<h3 id="DH-密钥协商算法"><a href="#DH-密钥协商算法" class="headerlink" title="DH 密钥协商算法"></a>DH 密钥协商算法</h3><p>由通信双方 A 和 B 一起协商生成一个会话密钥（思想比算法更重要）</p>
-
+        <a class="article-more-a"  href="/2020/03/14/encrypt-algo/#more">more >></a>
       
 
       
@@ -950,15 +784,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">学术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">复杂网络</a>
+                <a href="javascript:void(0)">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -970,19 +800,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">进阶</a>
+                <a href="javascript:void(0)">复杂网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -994,11 +812,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Python</a>
+                <a href="javascript:void(0)">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
               </li>
              
               <li class="article-tag-list-item">
