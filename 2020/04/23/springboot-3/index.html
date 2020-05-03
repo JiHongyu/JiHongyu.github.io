@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://jihongyu.github.io">
-  <title>Tag: 学术 | JiHy&#39;s Blogs</title>
+  <title>Springboot 注解驱动编程（Springboot 编程思想第7章） | JiHy&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个码农的自我修养">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JiHy&#39;s Blogs">
-<meta property="og:url" content="https://jihongyu.github.io/tags/学术/index.html">
+  <meta name="description" content="注解驱动发展史（不同 Spring 阶段的注解）Spring Framework 1.X@ManagedResource、@Transactional Spring Framework 2.0@Required、@Repository Spring Framework 2.5@Autowired、@Qualifier、@Component、@Service MVC: @Controller、@R">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Springboot 注解驱动编程（Springboot 编程思想第7章）">
+<meta property="og:url" content="https://jihongyu.github.io/2020/04/23/springboot-3/index.html">
 <meta property="og:site_name" content="JiHy&#39;s Blogs">
-<meta property="og:description" content="一个码农的自我修养">
+<meta property="og:description" content="注解驱动发展史（不同 Spring 阶段的注解）Spring Framework 1.X@ManagedResource、@Transactional Spring Framework 2.0@Required、@Repository Spring Framework 2.5@Autowired、@Qualifier、@Component、@Service MVC: @Controller、@R">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2020-05-03T14:43:09.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JiHy&#39;s Blogs">
-<meta name="twitter:description" content="一个码农的自我修养">
+<meta name="twitter:title" content="Springboot 注解驱动编程（Springboot 编程思想第7章）">
+<meta name="twitter:description" content="注解驱动发展史（不同 Spring 阶段的注解）Spring Framework 1.X@ManagedResource、@Transactional Spring Framework 2.0@Required、@Repository Spring Framework 2.5@Autowired、@Qualifier、@Component、@Service MVC: @Controller、@R">
   
     <link rel="alternative" href="/" title="JiHy&#39;s Blogs" type="application/atom+xml">
   
@@ -158,54 +160,187 @@ ga('send', 'pageview');
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-springboot-3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/22/aps-journals/" class="archive-article-date">
-  	<time datetime="2016-12-22T14:45:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/22/aps-journals/">APS Journals</a>
+    <h1 class="article-title" itemprop="name">
+      Springboot 注解驱动编程（Springboot 编程思想第7章）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        <a href="/2020/04/23/springboot-3/" class="archive-article-date">
+  	<time datetime="2020-04-23T15:05:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-23</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h2 id="注解驱动发展史（不同-Spring-阶段的注解）"><a href="#注解驱动发展史（不同-Spring-阶段的注解）" class="headerlink" title="注解驱动发展史（不同 Spring 阶段的注解）"></a>注解驱动发展史（不同 Spring 阶段的注解）</h2><h3 id="Spring-Framework-1-X"><a href="#Spring-Framework-1-X" class="headerlink" title="Spring Framework 1.X"></a>Spring Framework 1.X</h3><p>@ManagedResource、@Transactional</p>
+<h3 id="Spring-Framework-2-0"><a href="#Spring-Framework-2-0" class="headerlink" title="Spring Framework 2.0"></a>Spring Framework 2.0</h3><p>@Required、@Repository</p>
+<h3 id="Spring-Framework-2-5"><a href="#Spring-Framework-2-5" class="headerlink" title="Spring Framework 2.5"></a>Spring Framework 2.5</h3><p>@Autowired、@Qualifier、@Component、@Service</p>
+<p>MVC: @Controller、@RequestMapping、@ModelAttribute</p>
+<p>@JSR-250: Resource、@PostConstruct、@PreDestory</p>
+<h3 id="Spring-Framework-3-X"><a href="#Spring-Framework-3-X" class="headerlink" title="Spring Framework 3.X"></a>Spring Framework 3.X</h3><p>@Configuration、@Import、@ComponentScan、@Bean、@DependsOn、@Role、@Profile</p>
+<p>@RequestHeader、@CookieValue、@RequestPart、@ResponseBody、@ResponseStatus</p>
+<p>@PropertyResource、@Validated、@Asyn、@Scheduled</p>
+<p>接口：</p>
+<ul>
+<li>Environment：属性存储接口</li>
+<li>PropertySources：属性源抽象</li>
+</ul>
+<p>Spring 3.1 引入 @Enable 模块</p>
+<h3 id="Spring-Framework-4-X"><a href="#Spring-Framework-4-X" class="headerlink" title="Spring Framework 4.X"></a>Spring Framework 4.X</h3><p>@Conditional、@Repeatable、@AliasFor</p>
+<p>@CrossOrigin、@ControllerAdvice</p>
+<h3 id="Java-的元注解"><a href="#Java-的元注解" class="headerlink" title="Java 的元注解"></a>Java 的元注解</h3><p>@Retention：生命周期<br>@Target：作用位置<br>@Documented：生成 JavaDoc 文档<br>@Inherited：传递性<br>@Repeatable：重复注解</p>
+<h3 id="Spring-的元注解"><a href="#Spring-的元注解" class="headerlink" title="Spring 的元注解"></a>Spring 的元注解</h3><p>@Component：Spring 组件</p>
+<p>Spring 注解编程模型</p>
+<ul>
+<li>元注解 @Component</li>
+<li>Spring 模式注解：元注解的继承（以及多重继承）</li>
+<li>Spring 组合注解：注解的搭配</li>
+<li>Spring 注解属性别名和覆盖规则</li>
+</ul>
+<p>注：这里的注解继承需要打“引号”，它并不是通过继承或者实现某个类或接口来实现的。</p>
+<p>Spring Metadata: 是 Spring 围绕 <strong>注解编程</strong> 增强 JDK 反射特性定义的新接口</p>
+<ul>
+<li>ClassMetadata: 对 Class 的抽象</li>
+<li>AnnotatedTypeMetadata: 对注解的抽象</li>
+<li>AnnotationMetadata: 对 Class 的注解抽象</li>
+<li>MethodMetadata: 对 Method 的注解抽象</li>
+</ul>
+<p>（ps 以上类名取得不是很好，看名字稍微有点绕）</p>
+<p>Spring Metadata 实现了两簇数据实现：Simple 簇（ASM）、Standard 簇（JDK）</p>
+<p>AnnotationAttributes：Spring 对注解属性的抽象，是基于 LinkedHashMap 实现</p>
+<p>注解属性覆盖有两种方式：</p>
+<ul>
+<li>隐式覆盖：子类同名注解覆盖父类同名注解</li>
+<li>显示覆盖：<code>@AliasFor</code> 指定覆盖</li>
+</ul>
+<p>Spring 元注解之前最好不要互相标注，这个问题后面可以研究一下。<br>Spring 元注解之前最好不要互相标注，这个问题后面可以研究一下。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学术/">学术</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://jihongyu.github.io/2020/04/23/springboot-3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+  
+<nav id="article-nav">
+  
+    <a href="/2020/05/03/springboot-4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Springboot 模块驱动设计模式（Springboot 编程思想第8章）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/19/springboot-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Springboot 自动装配初探（Springboot 编程思想5～6章小结）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="springboot-3" data-title="Springboot 注解驱动编程（Springboot 编程思想第7章）" data-url="https://jihongyu.github.io/2020/04/23/springboot-3/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jhyqy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
           </div>
@@ -228,9 +363,9 @@ ga('send', 'pageview');
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

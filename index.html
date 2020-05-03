@@ -160,6 +160,168 @@ ga('send', 'pageview');
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-springboot-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/03/springboot-4/">Springboot 模块驱动设计模式（Springboot 编程思想第8章）</a>
+    </h1>
+  
+
+        <a href="/2020/05/03/springboot-4/" class="archive-article-date">
+  	<time datetime="2020-05-03T14:41:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从 Spring Framework 3.1 以后，Spring 逐渐向模块化框架演进。</p>
+<p>模块驱动核心的注解是 <code>@Import</code>，通过用法可以分为两类实现：</p>
+<ul>
+<li>注解驱动：导入普通 <code>@Configuration</code> 类</li>
+<li>接口编程：导入 <code>ImportSelector</code> 或者 <code>ImportBeanDefinitionRegistrar</code> 实现类</li>
+</ul>
+<p>（如果是 Xml 配置文件，则需使用注解 <code>@ImportResource</code>）</p>
+<p>Spring Bean 两中后置处理接口：<code>BeanPostProcessor</code>和<code>BeanFactoryPostProcessor</code></p>
+<ul>
+<li><code>BeanPostProcessor</code>：bean级别的处理，针对某个具体的bean进行处理</li>
+<li><code>BeanFactoryPostProcessor</code>：BeanFactory级别的处理，是针对整个Bean的工厂进行处理</li>
+</ul>
+<p>(未完待续)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/03/springboot-4/#more">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-springboot-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/23/springboot-3/">Springboot 注解驱动编程（Springboot 编程思想第7章）</a>
+    </h1>
+  
+
+        <a href="/2020/04/23/springboot-3/" class="archive-article-date">
+  	<time datetime="2020-04-23T15:05:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-23</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h2 id="注解驱动发展史（不同-Spring-阶段的注解）"><a href="#注解驱动发展史（不同-Spring-阶段的注解）" class="headerlink" title="注解驱动发展史（不同 Spring 阶段的注解）"></a>注解驱动发展史（不同 Spring 阶段的注解）</h2><h3 id="Spring-Framework-1-X"><a href="#Spring-Framework-1-X" class="headerlink" title="Spring Framework 1.X"></a>Spring Framework 1.X</h3><p>@ManagedResource、@Transactional</p>
+<h3 id="Spring-Framework-2-0"><a href="#Spring-Framework-2-0" class="headerlink" title="Spring Framework 2.0"></a>Spring Framework 2.0</h3><p>@Required、@Repository</p>
+<h3 id="Spring-Framework-2-5"><a href="#Spring-Framework-2-5" class="headerlink" title="Spring Framework 2.5"></a>Spring Framework 2.5</h3><p>@Autowired、@Qualifier、@Component、@Service</p>
+<p>MVC: @Controller、@RequestMapping、@ModelAttribute</p>
+<p>@JSR-250: Resource、@PostConstruct、@PreDestory</p>
+<h3 id="Spring-Framework-3-X"><a href="#Spring-Framework-3-X" class="headerlink" title="Spring Framework 3.X"></a>Spring Framework 3.X</h3><p>@Configuration、@Import、@ComponentScan、@Bean、@DependsOn、@Role、@Profile</p>
+<p>@RequestHeader、@CookieValue、@RequestPart、@ResponseBody、@ResponseStatus</p>
+<p>@PropertyResource、@Validated、@Asyn、@Scheduled</p>
+<p>接口：</p>
+<ul>
+<li>Environment：属性存储接口</li>
+<li>PropertySources：属性源抽象</li>
+</ul>
+<p>Spring 3.1 引入 @Enable 模块</p>
+<h3 id="Spring-Framework-4-X"><a href="#Spring-Framework-4-X" class="headerlink" title="Spring Framework 4.X"></a>Spring Framework 4.X</h3><p>@Conditional、@Repeatable、@AliasFor</p>
+<p>@CrossOrigin、@ControllerAdvice</p>
+<h3 id="Java-的元注解"><a href="#Java-的元注解" class="headerlink" title="Java 的元注解"></a>Java 的元注解</h3><p>@Retention：生命周期<br>@Target：作用位置<br>@Documented：生成 JavaDoc 文档<br>@Inherited：传递性<br>@Repeatable：重复注解</p>
+<h3 id="Spring-的元注解"><a href="#Spring-的元注解" class="headerlink" title="Spring 的元注解"></a>Spring 的元注解</h3><p>@Component：Spring 组件</p>
+<p>Spring 注解编程模型</p>
+<ul>
+<li>元注解 @Component</li>
+<li>Spring 模式注解：元注解的继承（以及多重继承）</li>
+<li>Spring 组合注解：注解的搭配</li>
+<li>Spring 注解属性别名和覆盖规则</li>
+</ul>
+<p>注：这里的注解继承需要打“引号”，它并不是通过继承或者实现某个类或接口来实现的。</p>
+<p>Spring Metadata: 是 Spring 围绕 <strong>注解编程</strong> 增强 JDK 反射特性定义的新接口</p>
+<ul>
+<li>ClassMetadata: 对 Class 的抽象</li>
+<li>AnnotatedTypeMetadata: 对注解的抽象</li>
+<li>AnnotationMetadata: 对 Class 的注解抽象</li>
+<li>MethodMetadata: 对 Method 的注解抽象</li>
+</ul>
+<p>（ps 以上类名取得不是很好，看名字稍微有点绕）</p>
+<p>Spring Metadata 实现了两簇数据实现：Simple 簇（ASM）、Standard 簇（JDK）</p>
+<p>AnnotationAttributes：Spring 对注解属性的抽象，是基于 LinkedHashMap 实现</p>
+<p>注解属性覆盖有两种方式：</p>
+<ul>
+<li>隐式覆盖：子类同名注解覆盖父类同名注解</li>
+<li>显示覆盖：<code>@AliasFor</code> 指定覆盖</li>
+</ul>
+<p>Spring 元注解之前最好不要互相标注，这个问题后面可以研究一下。<br>Spring 元注解之前最好不要互相标注，这个问题后面可以研究一下。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/23/springboot-3/#more">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-springboot-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -594,112 +756,9 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-the-art-of-unix-programming" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/18/the-art-of-unix-programming/">《Unix 编程艺术》内容整理</a>
-    </h1>
-  
-
-        <a href="/2017/04/18/the-art-of-unix-programming/" class="archive-article-date">
-  	<time datetime="2017-04-18T12:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-18</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Unix/Linux 神坑，追求简约精致的系统设计。</p>
-        <a class="article-more-a"  href="/2017/04/18/the-art-of-unix-programming/#more">more >></a>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/18/the-art-of-unix-programming/#more">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-compute-complexity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/08/compute-complexity/">计算复杂性</a>
-    </h1>
-  
-
-        <a href="/2017/04/08/compute-complexity/" class="archive-article-date">
-  	<time datetime="2017-04-08T02:24:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-08</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>计算复杂性理论基础介绍，看看就行，不需要作深入研究。</p>
-        <a class="article-more-a"  href="/2017/04/08/compute-complexity/#more">more >></a>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/08/compute-complexity/#more">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -784,11 +843,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学术</a>
+                <a href="javascript:void(0)">复杂网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">组合数学</a>
+                <a href="javascript:void(0)">学术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -800,7 +859,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">复杂网络</a>
+                <a href="javascript:void(0)">组合数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">进阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -816,23 +891,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">读书</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">进阶</a>
               </li>
              
               <li class="article-tag-list-item">
